@@ -1,7 +1,7 @@
 #docker build -f Dockerfile.container -t akash-container .
-#Make a data folder on your machine before running...
-#docker run -it -v $(pwd)/data:/data akash-container
+#Make a data folder on your machine before running...or use with an existing data folder!
+#docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/data:/data -v $(pwd)/variables:/variables akash-container
 FROM debian
-RUN apt-get update ; apt-get install -yqq jq dialog
+RUN apt-get update ; apt-get install -yqq jq dialog docker.io
 COPY *.sh ./
 ENTRYPOINT ["/menu.sh"]
