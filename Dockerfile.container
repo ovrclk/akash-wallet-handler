@@ -1,12 +1,13 @@
 #docker build -f Dockerfile.container -t akash-wallet-handler .
 #Make a data folder on your machine before running...or use with an existing data folder!
-#docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/data:/data -v $(pwd)/variables:/variables akash-wallet-handler
+#docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/data:/akash-wallet-handler/data -v $(pwd)/variables:/akash-wallet-handler/variables akash-wallet-handler
 
 #Fully Self Contained: Does not save data or variables
 #docker run -it -v /var/run/docker.sock:/var/run/docker.sock cryptoandcoffee/akash-wallet-handler
 
 FROM debian
 RUN apt-get update ; apt-get install -yqq jq dialog docker.io curl unzip
-COPY *.sh ./
-COPY Dockerfile ./
-ENTRYPOINT ["/menu.sh"]
+RUN mkdir -p /akash-wallet-handler
+COPY *.sh ./akash-wallet-handler/
+COPY Dockerfile ./akash-wallet-handler/
+ENTRYPOINT ["/akash-wallet-handler/menu.sh"]
