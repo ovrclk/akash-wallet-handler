@@ -1,12 +1,17 @@
 #!/bin/bash
-# utilitymenu.sh - A sample shell script to display menus on screen
-# Store menu options selected by the user
-cd akash-wallet-handler
-docker build -t akash .
-. variables
-INPUT=/tmp/menu.sh.$$
+# menu.sh - Akash wallet handler is an easy way to create addresses and manage your AKT.
+#Detect self-contained build
 
-# Storage file for displaying cal and date command output
+docker build -t akash .
+
+if [ -d akash-wallet-handler ]; then
+cd akash-wallet-handler
+fi
+if [ -f variables ]; then
+. variables
+fi
+
+INPUT=/tmp/menu.sh.$$
 OUTPUT=/tmp/output.sh.$$
 
 # get text editor or fall back to vi_editor
