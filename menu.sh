@@ -23,7 +23,7 @@ function display_output(){
 	local h=${1-10}			# box height default 10
 	local w=${2-41} 		# box width default 41
 	local t=${3-Output} 	# box title 
-	dialog --backtitle "Linux Shell Script Tutorial" --title "${t}" --clear --msgbox "$(<$OUTPUT)" ${h} ${w}
+	dialog --backtitle "Akash Wallet Handler" --title "${t}" --clear --msgbox "$(<$OUTPUT)" ${h} ${w}
 }
 #
 # Purpose - display current system date & time
@@ -31,13 +31,6 @@ function display_output(){
 function show_date(){
 	echo "Today is $(date) @ $(hostname -f)." >$OUTPUT
     display_output 6 60 "Date and Time"
-}
-#
-# Purpose - display a calendar
-#
-function show_calendar(){
-	cal >$OUTPUT
-	display_output 13 25 "Calendar"
 }
 #
 # set infinite loop
