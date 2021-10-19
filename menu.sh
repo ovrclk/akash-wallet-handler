@@ -1,12 +1,14 @@
 #!/bin/bash
 # menu.sh - Akash wallet handler is an easy way to create addresses and manage your AKT.
-#Detect self-contained build
 
 docker build -t akash .
 
+#Detect self-contained build
 if [ -d akash-wallet-handler ]; then
 cd akash-wallet-handler
 fi
+
+#Read existing variables
 if [ -f variables ]; then
 . variables
 fi
