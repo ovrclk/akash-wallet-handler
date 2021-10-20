@@ -2,15 +2,25 @@
 
 A command line GUI for managing an Akash wallet
 
+## Dependencies
+
+- Docker
+- JQ
+- Dialog
+
+Tested on Ubuntu 18.04+ 
+```
+apt-get update ; apt-get -yqq install jq dialog docker.io
+```
+
 ## Getting Started
 
 Install `jq` and `dialog`. Then `./menu.sh`.
 
 ## Todos
 ```
--- Deploy local deployment manager
+-- Deployment manager
 -- View last tx
--- Sending AKT
 -- View bids
 -- Place bids
 -- Bid manager?
