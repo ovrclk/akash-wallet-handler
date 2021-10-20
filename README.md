@@ -21,6 +21,8 @@ The akash-wallet-handler will detect a first time run and create a data folder a
 
 ```
 #To start akash-wallet-handler run:
+git clone https://github.com/ovrclk/akash-wallet-handler
+cd akash-wallet-handler
 ./menu.sh
 ```
 ## Support
