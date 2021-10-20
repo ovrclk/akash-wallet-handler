@@ -25,9 +25,10 @@ git clone https://github.com/ovrclk/akash-wallet-handler
 cd akash-wallet-handler
 ./menu.sh
 ```
-## Support
+## Support and Documentation
 
 If you need help or want to request changes please contact the team in Discord or create an issue here on github.
+Additionally you can check the Wiki for more documentation.
 
 ## Todos
 ```
