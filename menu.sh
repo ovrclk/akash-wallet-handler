@@ -256,7 +256,6 @@ case $menuitem in
 	Node) ./run-full-node.sh;;
 	Export) ./backup-private-keys.sh  ; echo "Showing keys for 10 seconds!" ; sleep 10;;
         Show) pass ; show_address ;;
-#        Show) pass ; echo "Showing address for 10 seconds!" ; docker exec -it akash /bin/bash -c "echo $pass | akash keys list | grep address | cut -d ':' -f2 | cut -c 2-" ; echo "" ; qrencode -t ASCIIi '$(docker exec -it akash /bin/bash -c "echo $pass | akash keys list | grep address | cut -d ':' -f2 | cut -c 2-")' ; sleep 10;;
         Check) echo "Showing balance for 10 seconds!" ; docker exec -it akash /bin/bash -c 'akash query bank balances --node $AKASH_NODE $AKASH_ACCOUNT_ADDRESS' ; sleep 10;;
         Run) run_command ; docker exec -it akash /bin/bash -c "akash $command" ; sleep 5 ; run_another;;
         Send) send_akt ; pass ; docker exec -it akash /bin/bash -c "echo $pass | akash tx bank send "'"$AKASH_ACCOUNT_ADDRESS"'" $receiveraddress ${receiveramount}uakt --fees 200uakt --chain-id akashnet-2 -b async -y";;
