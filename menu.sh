@@ -5,10 +5,12 @@
 #Detect self-contained build
 if [ -d akash-wallet-handler ]; then
 echo "Detected self contained build"
+echo "Building Akash Docker container"
 cd akash-wallet-handler
-docker build -t akash .
+docker build -t akash . > build_akash.log
 else
-docker build -t akash .
+echo "Building Akash Docker container"
+docker build -t akash . > build_akash.log
 fi
 
 #Read existing variables
@@ -59,7 +61,7 @@ else
 echo "Houston we have a problem!, Akash needs to be started"
 read -p "Start Akash now? (y/n)? " choice
 case "$choice" in
-  y|Y ) echo "yes" ; docker run -itd --env-file=variables --rm --name akash -v $(pwd)/data:/root/.akash akash ; echo "Akash now started!" ; STATUS="Running";;
+  y|Y ) echo "yes" ; echo "Starting Akash in Docker" ; docker run -itd --env-file=variables --rm --name akash -v $(pwd)/data:/root/.akash akash > start_akash.log ; echo "Akash now started!" ; STATUS="Running";;
   n|N ) echo "no" ; echo "Data and variables exist, must run Akash to use this wallet." ; sleep 5 ; exit;;
   * ) echo "invalid" ; return;;
 esac
