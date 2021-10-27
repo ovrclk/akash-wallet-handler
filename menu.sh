@@ -92,7 +92,7 @@ Show "Show wallet address and QR code" \
 Check "Check balance" \
 Send "Send AKT" \
 Node "Run full-node" \
-Export "Export private keys" \
+Export "Export private keys and mnemonic" \
 Run "Run command against CLI" \
 Exit "Exit to the shell" 2>"${INPUT}"
 menuitem=$(<"${INPUT}")
@@ -205,9 +205,10 @@ function show_address(){
 #. variables
 #        echo "Setup finished succesfully at $(date) you can now send funds to $AKASH_ACCOUNT_ADDRESS. Your account must have funds before you can deploy an instance." >$OUTPUT
 
-docker exec -it akash /bin/bash -c "echo $pass | akash keys list | grep address | cut -d ':' -f2 | cut -c 2-" ; echo "" ;
 dialog --clear
 qrencode -t ASCIIi $(docker exec -it akash /bin/bash -c "echo $pass | akash keys list | grep address | cut -d ':' -f2 | cut -c 2-")
+echo "Your AKT wallet address is :"
+docker exec -it akash /bin/bash -c "echo $pass | akash keys list | grep address | cut -d ':' -f2 | cut -c 2-" ; echo "" ;
 sleep 10
 #> qrcode.log
 #cat qrcode.log > $OUTPUT
