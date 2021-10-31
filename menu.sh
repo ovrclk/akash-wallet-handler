@@ -9,8 +9,15 @@ echo "Building Akash Docker container"
 cd akash-wallet-handler
 docker build -t akash . > build_akash.log
 else
-echo "Building Akash Docker container"
-docker build -t akash . > build_akash.log
+
+if docker ps | grep -q akash
+then
+    STATUS="Running"
+else
+    STATUS="Not running"
+    echo "Building Akash Docker container"
+    docker build -t akash . > build_akash.log
+fi
 fi
 
 #Read existing variables
@@ -227,6 +234,10 @@ function finish(){
 }
 
 function akashlytics(){
+
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+
 if [ -f ./Akashlytics\ Deploy-0.3.1.AppImage ]; then
 echo "Already have the latest AppImage"
 ./Akashlytics\ Deploy-0.3.1.AppImage
@@ -240,7 +251,32 @@ docker exec -it akash /bin/bash -c "akash keys mnemonic"
 echo "Copy this to your clipboard now"
 sleep 10
 ./Akashlytics\ Deploy-0.3.1.AppImage
+echo "Congratulations - you've made it one step closer to deploying on Akash"
+echo "To make getting started easier we invite you to goto the Akash Faucet at this time to claim your AKT"
+echo "The faucet will require you to authenticate with a Github account." 
+echo "-----"
+echo "Faucet Link : https://drip.akash.network"
+echo "Your AKT wallet address : $AKASH_ACCOUNT_ADDRESS"
+echo "-----"
+echo "Sleeping for 120 seconds for you to access the Faucet"
+#echo "You can continue to use akash-wallet-handler to send and receive AKT from Akashlytics"
+sleep 120
 fi
+
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+        echo "$OSTYPE is not supported at this time"
+elif [[ "$OSTYPE" == "cygwin" ]]; then
+        echo "$OSTYPE is not supported at this time"
+elif [[ "$OSTYPE" == "msys" ]]; then
+        echo "$OSTYPE is not supported at this time"
+elif [[ "$OSTYPE" == "win32" ]]; then
+        echo "$OSTYPE is not supported at this time"
+elif [[ "$OSTYPE" == "freebsd"* ]]; then
+        echo "$OSTYPE is not supported at this time"
+else
+        echo "$OSTYPE is not supported at this time"
+fi
+
 }
 
 
