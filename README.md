@@ -32,6 +32,11 @@ git clone https://github.com/ovrclk/akash-wallet-handler
 cd akash-wallet-handler
 ./menu.sh
 ```
+
+# Deploy on Akash
+
+The fastest way to deploy an SDL file on Akash is to use the Deploy menu inside the application.  The easiest way is with an AppImage provided by Akashlytics.  Select `Deploy > Akashlytics UI` and follow the instructions to deploy your first application on Akash.  After that, you can continue to use the akash-wallet-handler to send/receive transactions and additionally deploy applications manually using `Deploy > Awesome Akash`.
+
 # Support and Documentation
 
 If you need help or want to request changes please contact the team in Discord or create an issue here on github.
