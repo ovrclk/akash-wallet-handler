@@ -88,6 +88,7 @@ letter of the choice as a hot key, or the \n\
 number keys 1-9 to choose an option.\n\
 Choose the TASK" 25 50 7 \
 Setup "First time setup and wallet creation" \
+Deploy "Deploy a Docker container on Akash Network" \
 Show "Show wallet address and QR code" \
 Check "Check balance" \
 Send "Send AKT" \
@@ -224,6 +225,52 @@ function finish(){
 	echo "Setup finished succesfully at $(date) you can now send funds to $AKASH_ACCOUNT_ADDRESS. Your account must have funds before you can deploy an instance." >$OUTPUT
     display_output 0 0 "Setup Finished"
 }
+
+function akashlytics(){
+if [ -f ./Akashlytics%20Deploy-0.3.1.AppImage ]; then
+echo "Already have the latest AppImage"
+./Akashlytics%20Deploy-0.3.1.AppImage
+else
+wget https://storage.googleapis.com/akashlytics-deploy-public/Akashlytics%20Deploy-0.3.1.AppImage
+chmod +x Akashlytics%20Deploy-0.3.1.AppImage
+echo "Now showing your mnemonic phrase, you will copy and paste this into Akashlytics the first time."
+echo ""
+echo "Your mnemonic recovery phrase is :"
+docker exec -it akash /bin/bash -c "akash keys mnemonic"
+echo "Copy this to your clipboard now"
+sleep 10
+./Akashlytics%20Deploy-0.3.1.AppImage
+fi
+}
+
+
+function deploy () {
+cmd=(dialog --separate-output --checklist "Select options:" 0 0 0)
+options=(1 "Deploy using Akashlytics (GUI)" on    # any option can be set to default to "on"
+         2 "Deploy using this tool" off
+         3 "Deploy using React web app" off )
+choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+clear
+for choice in $choices
+do
+    case $choice in
+        1)
+            akashlytics
+            ;;
+        2)
+            deploy-now
+            ;;
+        3)
+            react
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+}
+
+
 function setup () {
 cmd=(dialog --separate-output --checklist "Select options:" 0 0 0)
 options=(1 "Create wallet and first run!" on    # any option can be set to default to "on"
@@ -256,6 +303,7 @@ done
 # make decsion 
 case $menuitem in
 	Setup) setup;;
+        Deploy) deploy;;
 	Node) ./run-full-node.sh;;
 	Export) ./backup-private-keys.sh  ; echo "Showing keys for 10 seconds!" ; sleep 10;;
         Show) pass ; show_address ;;
