@@ -227,19 +227,19 @@ function finish(){
 }
 
 function akashlytics(){
-if [ -f ./Akashlytics%20Deploy-0.3.1.AppImage ]; then
+if [ -f ./Akashlytics\ Deploy-0.3.1.AppImage ]; then
 echo "Already have the latest AppImage"
-./Akashlytics%20Deploy-0.3.1.AppImage
+./Akashlytics\ Deploy-0.3.1.AppImage
 else
 wget https://storage.googleapis.com/akashlytics-deploy-public/Akashlytics%20Deploy-0.3.1.AppImage
-chmod +x Akashlytics%20Deploy-0.3.1.AppImage
+chmod +x ./Akashlytics\ Deploy-0.3.1.AppImage
 echo "Now showing your mnemonic phrase, you will copy and paste this into Akashlytics the first time."
 echo ""
 echo "Your mnemonic recovery phrase is :"
 docker exec -it akash /bin/bash -c "akash keys mnemonic"
 echo "Copy this to your clipboard now"
 sleep 10
-./Akashlytics%20Deploy-0.3.1.AppImage
+./Akashlytics\ Deploy-0.3.1.AppImage
 fi
 }
 
