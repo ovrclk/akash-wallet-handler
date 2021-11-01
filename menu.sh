@@ -264,7 +264,36 @@ sleep 120
 fi
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-        echo "$OSTYPE is not supported at this time"
+
+if [ -f ./Applications/Akashlytics\ Deploy.app ]; then
+open -a ./Applications/Akashlytics\ Deploy.app
+else
+wget https://storage.googleapis.com/akashlytics-deploy-public/Akashlytics%20Deploy-0.3.1.dmg
+echo "Akashlytics has been downloaded to $(pwd).  Please install the Application now. Waiting 15 seconds until trying to detect..."
+sleep 15
+until [ -f ./Applications/Akashlytics\ Deploy.ap ]
+do
+     sleep 30
+done
+
+echo "Now showing your mnemonic phrase, you will copy and paste this into Akashlytics the first time."
+echo ""
+echo "Your mnemonic recovery phrase is :"
+docker exec -it akash /bin/bash -c "akash keys mnemonic"
+echo "Copy this to your clipboard now"
+sleep 10
+./Applications/Akashlytics\ Deploy.app
+echo "Congratulations - you've made it one step closer to deploying on Akash"
+echo "To make getting started easier we invite you to goto the Akash Faucet at this time to claim your AKT"
+echo "The faucet will require you to authenticate with a Github account." 
+echo "-----"
+echo "Faucet Link : https://drip.akash.network"
+echo "Your AKT wallet address : $AKASH_ACCOUNT_ADDRESS"
+echo "-----"
+echo "Sleeping for 120 seconds for you to access the Faucet"
+#echo "You can continue to use akash-wallet-handler to send and receive AKT from Akashlytics"
+fi
+
 elif [[ "$OSTYPE" == "cygwin" ]]; then
         echo "$OSTYPE is not supported at this time"
 elif [[ "$OSTYPE" == "msys" ]]; then
