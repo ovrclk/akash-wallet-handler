@@ -8,19 +8,22 @@ A command line GUI for managing an Akash wallet
 - dialog
 - qrencode
 - curl
+- jq
 
 ## Debian 10+/Ubuntu 18.04+
 ```
-apt-get update ; apt-get -yqq install dialog qrencode docker.io curl
+apt-get update ; apt-get -yqq install dialog qrencode curl jq docker.io 
 ```
 ## Arch Linux (Manjaro)
 ```
-pacman -S dialog qrencode docker curl
+pacman -S dialog qrencode curl jq docker
 ```
 ## Mac (Requires [Docker installed](https://docs.docker.com/desktop/mac/install/))
 ```
 brew install qrencode
 brew install dialog
+brew install curl
+brew install jq
 ```
 
 # Getting Started
