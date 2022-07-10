@@ -374,7 +374,7 @@ case $menuitem in
         Show) pass ; show_address ;;
         Check) echo "Showing balance for 10 seconds!" ; docker exec -it akash /bin/bash -c 'akash query bank balances --node $AKASH_NODE $AKASH_ACCOUNT_ADDRESS' ; sleep 10;;
         Run) run_command ; docker exec -it akash /bin/bash -c "akash $command" ; sleep 5 ; run_another;;
-        Send) send_akt ; pass ; docker exec -it akash /bin/bash -c "echo $pass | akash tx bank send "'"$AKASH_ACCOUNT_ADDRESS"'" $receiveraddress ${receiveramount}uakt --fees 200uakt --chain-id akashnet-2 -b async -y";;
+        Send) send_akt ; pass ; docker exec -it akash /bin/bash -c "echo $pass | akash tx bank send "'"$AKASH_ACCOUNT_ADDRESS"'" $receiveraddress ${receiveramount}uakt --fees 5000uakt --chain-id akashnet-2 -b block -y";;
 	Exit) echo "Bye"; break;;
 
 esac
