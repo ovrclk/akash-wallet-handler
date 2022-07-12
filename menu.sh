@@ -16,7 +16,7 @@ then
 else
     STATUS="Not running"
     echo "Building Akash Docker container"
-    docker build -t akash . > build_akash.log
+    docker build -t akash . --no-cache > build_akash.log
 fi
 fi
 
